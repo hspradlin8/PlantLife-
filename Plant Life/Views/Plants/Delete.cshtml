@@ -36,11 +36,11 @@
             @Html.DisplayFor(model => model.WaterNeeds)
         </dd>
         @*<dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>*@
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Description)
+            </dd>*@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Issues)
         </dt>
@@ -54,13 +54,46 @@
             @Html.DisplayFor(model => model.Quantity)
         </dd>
     </dl>
-    
+
     <form asp-action="DeleteConfirmed" enctype="multipart/form-data">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-secondary" /> |
         <a asp-action="Index" class="btn-btn-success">Back to List</a>
         <div class="form-group">
-           <img src="@("/Images/" + Model.Image)" alt="Plant Pic" style="max-width:150px" />
+            <img src="@("/Images/" + Model.Image)" alt="Plant Pic" style="max-width:150px" />
         </div>
     </form>
 </div>
+@*<div class="container">
+        <div class="row justify-content-md-left">
+                <div class="card border-secondary mb-3 col-6" style="max-width:20rem; margin: 9px; border-width:7px;">
+                    <h4><div class="card-header">@Html.DisplayFor(modelItem => Model.PlantName)</div></h4>
+                    <div class="card-body">
+                        <h6 class="card-title"><strong>Sunlight</strong></h6>
+                        <p class="card-text">@Html.DisplayFor(modelItem => Model.Sunlight)</p>
+                        <h6 class="card-title"><strong>Temperature</strong></h6>
+                        <p class="card-text">@Html.DisplayFor(modelItem => Model.Temperature)</p>
+                        <h6 class="card-title"><strong>Water Needs</strong></h6>
+                        <p class="card-text">@Html.DisplayFor(modelItem => Model.WaterNeeds)</p>
+                        <h6 class="card-title"><strong>Issues</strong></h6>
+                        <p class="card-text">@Html.DisplayFor(modelItem => Model.Issues)</p>
+                        @if (Model.Image == null)
+                        {
+                            <p>No photo available</p>
+                            <p> </p>
+                            <a asp-controller="Plants" asp-action="Edit" asp-route-id="@Model.Id" class="btn-sm btn-success" style="margin-bottom: 6px !important; padding-bottom:6px;">Add An Image</a>
+                        }
+                        else
+                        {
+                            <img src="@("/Images/" + Model.Image)" style="max-width: 150px" />
+                        }
+                        <form asp-action="AddDefaultPlant">
+                            <input type="hidden" name="id" value="@Model.Id" />
+                            <input type="submit" class="btn-sm btn-success" style="margin-bottom: 6px;" id="btn-@Model.Id" value="Add to My Plants" /> |
+                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-sm btn-secondary">Edit</a> |
+                            <a asp-action="Delete" asp-route-id="@Model.Id" class="btn-sm btn-secondary">Delete</a>
+                        </form>
+                    </div>
+                </div>
+        </div>
+    </div>*@

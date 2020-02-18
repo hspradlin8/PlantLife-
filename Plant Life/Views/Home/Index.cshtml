@@ -8,15 +8,23 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome to Plant Life</h1>
-    <div>
-        <img class="gnome" style="height:250px; width:250px;" src="~/Images/OverProject.png">
-    </div>
+    @*<h1 class="display-4">Welcome to Plant Life</h1>*@
+    @*<div>
+            <img class="gnome" src="~/Images/OverProject.png" style="height:150px; width:150px;">
+        </div>*@
     @if (user != null)
     {
 
-        <div id='calendar'></div>
+        <div id='calendar' style="margin-top:2em;"></div>
     }
+    <div>
+        <p>Welcome to Plant Life where new gardeners can have a list of their plants by adding their own plant.</p>
+        <p> Or choose from the list of plants in the succulent family. </p>
+        <p> Check out the calendar to find out what days to water your plants.</p>
+        <div>
+            <img class="gnome" src="~/Images/OverProject.png" style="height:150px; width:150px;">
+        </div>
+    </div>
 
 </div>
 <script src="~/js/site.js" asp-append-version="true"></script>
