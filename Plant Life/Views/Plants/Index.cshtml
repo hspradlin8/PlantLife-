@@ -11,7 +11,7 @@
 <p>
     <a asp-action="Create" class="btn btn-success">Create New</a>
 </p>
-<table class="table">
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -25,11 +25,11 @@
             </th>
             <th>
                 Water Needs
-            </th>
-            @*<th>
-                Description
             </th>*@
-            <th>
+            @*<th>
+                    Description
+                </th>*@
+            @*<th>
                 Issues
             </th>
             <th>
@@ -44,73 +44,117 @@
     <tbody>
         @foreach (var item in Model.Plants)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PlantName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sunlight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Temperature)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.WaterNeeds)
-            </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.Issues)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-            <a asp-controller="Plants" asp-action="Edit" asp-route-id="@item.Id">Add An Image</a>
-                <img src="@("/Images/" + item.Image)" style="max-width: 150px" />
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a> 
+            <tr>
+                <td>*@
+                    @*@Html.DisplayFor(modelItem => item.PlantName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sunlight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Temperature)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WaterNeeds)
+                </td>*@
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>*@
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Issues)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    @if (item.Image == null)
+                    {
+                        <p>No photo available</p>
+                        <a asp-controller="Plants" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Add An Image</a>
+                    }
+                    else
+                    {
+                        <img src="@("/Images/" + item.Image)" style="max-width: 150px" />
+                    }
+                </td>
+                <td>*@
+                    @*<a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-secondary">Edit</a>
 
-                <a asp-action="Delete" asp-route-id="@item.Id"class="btn btn-secondary">Delete</a>
-            </td>
-        </tr>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-secondary">Delete</a>
+                </td>
+            </tr>
         }
         @foreach (var item in Model.DefaultPlantUsers)
         {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.DefaultPlant.PlantName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DefaultPlant.Sunlight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DefaultPlant.Temperature)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DefaultPlant.WaterNeeds)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.DefaultPlant.Description)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.DefaultPlant.Issues)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DefaultPlant.Quantity)
-        </td>
-        <td>
-            <a asp-controller="Plants" asp-action="EditUserDefault" asp-route-id="@item.DefaultPlant.Id">Add An Image</a>
-           @* <img src="@("/Images/" + item.Image)" style="max-width: 150px" />*@
-        </td>
-        <td>
-            <a asp-controller="Plants" asp-action="EditUserDefault" asp-route-id="@item.DefaultPlant.Id">Edit</a> 
-            <a asp-controller="Plants" asp-action="DeleteDefaultPlant" asp-route-id="@item.Id">Delete</a>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DefaultPlant.PlantName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DefaultPlant.Sunlight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DefaultPlant.Temperature)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DefaultPlant.WaterNeeds)
+                </td>*@
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.DefaultPlant.Description)
+                    </td>*@
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.DefaultPlant.Issues)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DefaultPlant.Quantity)
+                </td>
+                <td>*@
+                    @*<a asp-controller="Plants" asp-action="EditUserDefault" asp-route-id="@item.DefaultPlant.Id">Add An Image</a>*@
+                    @* <img src="@("/Images/" + item.Image)" style="max-width: 150px" />*@
+                @*</td>
+                <td>
+                    <a asp-controller="Plants" asp-action="EditUserDefault" asp-route-id="@item.DefaultPlant.Id">Edit</a>
+                    <a asp-controller="Plants" asp-action="DeleteDefaultPlant" asp-route-id="@item.Id">Delete</a>
 
-        </td>
-    </tr>
+                </td>
+            </tr>
         }
     </tbody>
-</table>
+</table>*@
+<div class="container">
+    <div class="row justify-content-md-center">
+        @foreach (var item in Model.Plants)
+        {
+            <div class="card border-secondary mb-3 col-6" style="max-width:20rem; margin: 9px; border-width:7px;">
+                <h4><div class="card-header">@Html.DisplayFor(modelItem => item.PlantName)</div></h4>
+                <div class="card-body">
+                    @if (item.Image == null)
+                    {
+                        <p>No photo available</p>
+                        <p> </p>
+                        @*<a asp-controller="Plants" asp-action="Edit" asp-route-id="@item.Id" class="btn-sm btn-success">Add An Image</a>*@
+                    }
+                    else
+                    {
+                        <img src="@("/Images/" + item.Image)" style="max-width: 150px" />
+                    }
+                    <h6 class="card-title"><strong>Sunlight</strong></h6>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Sunlight)</p>
+                    <h6 class="card-title"><strong>Temperature</strong></h6>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Temperature)</p>
+                    <h6 class="card-title"><strong>Water frequency (in days)</strong></h6>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.WaterNeeds)</p>
+                    <h6 class="card-title"><strong>Issues</strong></h6>
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Issues)</p>
+                    <form asp-action="AddDefaultPlant">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <a asp-controller="Plants" asp-action="Edit" asp-route-id="@item.Id" class="btn-sm btn-success">Add An Image</a>
+                        <input type="submit" class="btn-sm btn-success" style="margin-bottom: 6px;" id="btn-@item.Id" value="Add to My Plants" /> |
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-sm btn-secondary">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn-sm btn-secondary">Delete</a>
+                    </form>
+                </div>
+            </div>
+        }
+    </div>
+</div>

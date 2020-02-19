@@ -157,21 +157,27 @@ namespace Plant_Life.Controllers
         {
             return _context.Calendar.Any(e => e.Id == id);
         }
+
         //step1:Get start date and days frequency
-        //step2: Find out what day to put the first event on     today's plantDate
-        //a. find out the difference in days between the today and the startdate  event.Date and getDate.now 
+        //step2: Find out what day to put the first event on    
+        //a. find out the difference in days between the today and the startdate   
         //b. find remainder given the days frequency 
         //c. if the remainder is zero- put the event on today; if it is 1 then put the remainder on the next day.
         //step3: create new event happening every x days from the start day and add as many as you want. 
 
+
+        //looping through a date range using an interval
         public IEnumerable<DateTime> EachDay(DateTime from, DateTime thru, int interval)
         {
             for (var day = from.Date; day.Date <= thru.Date; day = day.AddDays(interval))
                 yield return day;
         }
 
-        public async Task <IActionResult> GetUserEvents()
+        public async Task<IActionResult> GetUserEvents()
         {
+            /*try catch- when the home page loads and there are no events the calendar will still load and let the 
+            user login, view the calendar, my plants, and plant list and add events. */
+
             var user = await GetCurrentUserAsync();
             var userEvents = new PlantIndexViewModel();
             try
@@ -181,25 +187,32 @@ namespace Plant_Life.Controllers
                 userEvents.DefaultPlantUsers = _context.DefaultPlantUser.Where(e => e.ApplicationUserId == user.Id)
                     .Include(dp => dp.DefaultPlant).ToList();
 
-                foreach(Plant p in userEvents.Plants)
+                //looping through the plant with the watering event for that plant
+                foreach (Plant p in userEvents.Plants)
                 {
                     List<DateTime> WaterDates = new List<DateTime>();
                     int TimesperMonth = p.WaterNeeds;
-                    int daysInMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
+                    int daysInYear = DateTime.IsLeapYear(DateTime.Now.Year) ? 366 : 365;
                     int dayOfMonth = DateTime.Now.Day;
                     DateTime startDate = p.DateCreated;
-                    DateTime lastDayOfCurrentMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month,
-                                    DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
-                    int DaysLeftInMonth = daysInMonth - dayOfMonth;
-                    int WaterDayCount = DaysLeftInMonth / TimesperMonth;
+                    DateTime lastDayOfCurrentYear = new DateTime(DateTime.Now.Year, 12, 31);
+                       
 
- 
+                   
+                    int DaysLeftInYear = daysInYear - dayOfMonth;
+                    int WaterDayCount = DaysLeftInYear / TimesperMonth;
 
-                    foreach (DateTime day in EachDay(startDate, lastDayOfCurrentMonth, p.WaterNeeds))
+                    /*how the calendar loops through the date created to the last day of the month 
+                    based on water needs(which is times per month)*/
+
+                    foreach (DateTime day in EachDay(startDate, lastDayOfCurrentYear, p.WaterNeeds))
                     {
                         WaterDates.Add(day);
                     }
- 
+
+                    //creating watering events
+                    //The forEach method executes a newWaterEvent function once for each WaterDate
+
                     for (int i = 0; i < WaterDates.Count; i++)
                     {
                         Event newWaterEvent = new Event()
@@ -212,13 +225,13 @@ namespace Plant_Life.Controllers
                     }
                 }
             }
-            catch(InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 return View("~/Views/Home/Index.cshtml");
 
             }
 
-       
+
             return Json(userEvents.Events);
         }
 

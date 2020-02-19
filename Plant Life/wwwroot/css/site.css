@@ -1,16 +1,33 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-.gnome {
-    height: 50px !important;
-    width: 80px !important;
+/*.gnome {
+    height: 300px !important;
+    width: 300px !important;
+}*/
+.btn-sm btn-success {
+margin-bottom: 6px !important;
+padding-bottom: 6px;
+}
+.card {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+.nav-item-tabs {
+    justify-content: flex-end !important;
 }
 
+#register {
+    align-content: center;
+}
+
+#login {
+    align-content: center;
+}
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
